@@ -2,14 +2,12 @@ import { NextResponse } from 'next/server'
 import { revalidatePath, revalidateTag } from 'next/cache'
 import { isAdminAuthenticated } from '@/lib/admin-auth'
 import { defaultSiteContent, saveSiteContent, type Product, type Project, type ProjectCategory, type SiteContent, type Solution } from '@/lib/site-content'
+import { hasAllowedOrigin } from '@/lib/request-origin'
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
 
-function sameOrigin(request: Request) {
-  const origin = request.headers.get('origin')
-  return Boolean(origin) && new URL(origin as string).host === new URL(request.url).host
-}
+const sameOrigin = hasAllowedOrigin
 function text(value: unknown, max: number, fallback = ''): string | null {
   if (typeof value !== 'string' || value.length > max) return fallback ? fallback : null
   return value.trim()

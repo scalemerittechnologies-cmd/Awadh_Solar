@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server'
+import { hasAllowedOrigin } from '@/lib/request-origin'
 import { revalidatePath, revalidateTag } from 'next/cache'
 import { isAdminAuthenticated } from '@/lib/admin-auth'
 import { getSiteContent, saveSiteContent, type Project, type ProjectCategory } from '@/lib/site-content'
@@ -17,8 +18,7 @@ function safePhoto(value: unknown) {
     || /^https:\/\/[a-z0-9.-]+(?::\d+)?(?:\/[^\s]*)?$/i.test(value)
 }
 export async function PUT(request: Request) {
-  const origin = request.headers.get('origin')
-  if (!origin || new URL(origin).host !== new URL(request.url).host) return NextResponse.json({ error: 'Invalid request origin.' }, { status: 403 })
+  if (!hasAllowedOrigin(request)) return NextResponse.json({ error: 'Invalid request origin.' }, { status: 403 })
   if (!await isAdminAuthenticated()) return NextResponse.json({ error: 'Sign in required.' }, { status: 401 })
   const length = Number(request.headers.get('content-length') ?? '0')
   if (length > 10_000_000) return NextResponse.json({ error: 'Content is too large.' }, { status: 413 })

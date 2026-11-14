@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server'
 import { getEnquirySettings } from '@/lib/enquiry-settings'
 import { getWhatsAppUrl } from '@/lib/whatsapp'
 import { markLeadSynced, saveLead } from '@/lib/lead-storage'
+import { hasAllowedOrigin } from '@/lib/request-origin'
 
 const attempts = new Map<string, number[]>()
 export async function GET() {
@@ -20,8 +21,7 @@ export async function GET() {
 
 export async function POST(request: Request) {
   // Origin check
-  const origin = request.headers.get('origin')
-  if (origin && new URL(request.url).origin !== origin) {
+  if (!hasAllowedOrigin(request, false)) {
     return NextResponse.json({ error: 'Invalid origin' }, { status: 403 })
   }
 

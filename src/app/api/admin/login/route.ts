@@ -1,17 +1,13 @@
 import { NextResponse } from 'next/server'
 import { adminConfigured, adminSessionCookie, checkAdminCredentials, createAdminSession } from '@/lib/admin-auth'
+import { hasAllowedOrigin } from '@/lib/request-origin'
 
 export const runtime = 'nodejs'
 const attempts = new Map<string, { count: number; startedAt: number }>()
 const WINDOW_MS = 15 * 60 * 1000
 
-function sameOrigin(request: Request) {
-  const origin = request.headers.get('origin')
-  return !origin || new URL(origin).host === new URL(request.url).host
-}
-
 export async function POST(request: Request) {
-  if (!sameOrigin(request)) return NextResponse.json({ error: 'Invalid request origin.' }, { status: 403 })
+  if (!hasAllowedOrigin(request, false)) return NextResponse.json({ error: 'Invalid request origin.' }, { status: 403 })
   const ip = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ?? 'local'
   const now = Date.now()
   const record = attempts.get(ip)

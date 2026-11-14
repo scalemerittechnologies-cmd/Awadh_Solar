@@ -4,13 +4,13 @@ import { NextResponse } from 'next/server'
 import { isAdminAuthenticated } from '@/lib/admin-auth'
 import { saveUploadedImage } from '@/lib/site-content'
 import { maxD1ImageBytes } from '@/lib/cloudflare-media'
+import { hasAllowedOrigin } from '@/lib/request-origin'
 
 export const runtime = 'nodejs'
 const maxBytes = 4 * 1024 * 1024
 
 export async function POST(request: Request) {
-  const origin = request.headers.get('origin')
-  if (!origin || new URL(origin).host !== new URL(request.url).host) return NextResponse.json({ error: 'Invalid request origin.' }, { status: 403 })
+  if (!hasAllowedOrigin(request)) return NextResponse.json({ error: 'Invalid request origin.' }, { status: 403 })
   if (!await isAdminAuthenticated()) return NextResponse.json({ error: 'Sign in required.' }, { status: 401 })
   let form: FormData
   try { form = await request.formData() } catch { return NextResponse.json({ error: 'Choose an image to upload.' }, { status: 400 }) }

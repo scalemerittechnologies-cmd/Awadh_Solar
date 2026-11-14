@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 import { isAdminAuthenticated } from '@/lib/admin-auth'
 import { defaultEnquirySettings, getEnquirySettings, saveEnquirySettings, validEndpoint, type EnquiryPopupCopy } from '@/lib/enquiry-settings'
+import { hasAllowedOrigin } from '@/lib/request-origin'
 
 export const dynamic = 'force-dynamic'
 
@@ -25,7 +26,7 @@ function validPopup(value: unknown): value is EnquiryPopupCopy {
 }
 
 export async function PUT(request: Request) {
-  if (request.headers.get('origin') !== new URL(request.url).origin) return NextResponse.json({ error: 'Invalid origin' }, { status: 403 })
+  if (!hasAllowedOrigin(request)) return NextResponse.json({ error: 'Invalid origin' }, { status: 403 })
   if (!await isAdminAuthenticated()) return NextResponse.json({ error: 'Sign in required' }, { status: 401 })
   try {
     const input = await request.json() as { formUrl?: unknown; sheetUrl?: unknown; enabled?: unknown; endpoint?: unknown; token?: unknown; popup?: unknown }
