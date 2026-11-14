@@ -24,6 +24,7 @@ html {
   scroll-behavior: smooth;
   overflow-x: hidden;
   max-width: 100vw;
+  width: 100%;
 }
 
 body {
@@ -32,6 +33,14 @@ body {
   color: var(--ink);
   font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  max-width: 100vw;
+  width: 100%;
+  min-width: 0;
+}
+
+/* Global overflow containment */
+#top {
   overflow-x: hidden;
   max-width: 100vw;
   width: 100%;
@@ -48,6 +57,39 @@ button, input, select {
 
 button, a {
   -webkit-tap-highlight-color: transparent;
+}
+
+/* Hide Netlify Injected Badge / Drawer / Feedback — comprehensive nuclear approach */
+iframe[src*="netlify"],
+iframe[title*="Netlify"],
+iframe[id*="netlify"],
+[data-netlify-badge],
+[data-netlify-drawer],
+netlify-drawer,
+.netlify-badge,
+#netlify-badge,
+div[class*="netlify-badge"],
+div[id*="netlify-badge"],
+div[class*="netlify"],
+a[href*="netlify.com"],
+div[style*="netlify"],
+[class*="Netlify"],
+[id*="Netlify"],
+body > div:last-child:not([class]):not([id]) > a[href*="netlify"],
+body > div[style*="position: fixed"][style*="bottom"] > a[href*="netlify"],
+body > div[style*="z-index"]:not(.site-footer):not(.hero):not(.site-header) iframe,
+body > iframe:not([src*="youtube"]):not([src*="google"]):not([src*="maps"]) {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  max-width: 0 !important;
+  max-height: 0 !important;
+  overflow: hidden !important;
+  position: absolute !important;
+  clip: rect(0, 0, 0, 0) !important;
 }
 
 ::selection {
@@ -355,6 +397,7 @@ button, a {
   max-width: 1400px;
   margin: 0 auto 90px;
   padding: 0 5%;
+  overflow: hidden;
 }
 
 .local-photo {

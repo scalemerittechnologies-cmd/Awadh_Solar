@@ -37,6 +37,7 @@ body {
 
 main {
   overflow: clip;
+  max-width: 100%;
 }
 
 button {
@@ -376,6 +377,8 @@ button {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  box-sizing: border-box;
+  width: 100%;
 }
 
 .hero-copy {
@@ -3002,9 +3005,12 @@ html{scroll-padding-top:var(--home-anchor-offset)}
   align-items: center;
   padding: 28px 24px 28px 12px;
   z-index: 1;
+  overflow: hidden;
+  box-sizing: border-box;
+  max-width: 48%;
 }
 
-.scheme-deadline{display:grid;grid-template-columns:1.2fr 1fr;align-items:center;gap:40px;background:#055598;color:#fff;padding:38px max(5%,calc((100vw - 1280px)/2));border-bottom:1px solid #ffffff25;font-family:var(--font-poppins),sans-serif}
+.scheme-deadline{display:grid;grid-template-columns:1.2fr 1fr;align-items:center;gap:40px;background:#055598;color:#fff;padding:38px max(5%,calc((100% - 1280px)/2));border-bottom:1px solid #ffffff25;font-family:var(--font-poppins),sans-serif;overflow:hidden;box-sizing:border-box;max-width:100%}
 .scheme-deadline-kicker{display:flex;align-items:center;gap:10px;color:#ffcf77;font-size:12px;font-weight:700;letter-spacing:1.2px}
 .scheme-deadline h2{font-size:clamp(20px,2.2vw,29px);font-weight:700;line-height:1.4;margin:12px 0}
 .scheme-deadline-copy p{font-size:14px;color:#cee0ef;line-height:1.7}.scheme-deadline-copy strong{color:#ffd17b;white-space:nowrap}

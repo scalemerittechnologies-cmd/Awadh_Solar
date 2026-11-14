@@ -197,7 +197,7 @@ export function Footer({ brand = 'Over The Top Solar', phone = '89530 69011', ad
       {/* Bottom Legal & Copyright Bar */}
       <div className="footer-bottom-bar">
         <div className="bottom-bar-inner">
-          <p>© {new Date().getFullYear()} Over The Top Solar (Awadh Enterprises). <T>All rights reserved.</T></p>
+          <p>© {new Date().getFullYear()} Awadh Enterprises (Over The Top Solar). <T>All rights reserved.</T></p>
           <div className="footer-legal-links">
             <Link href="/privacy-policy"><T>Privacy Policy</T></Link>
             <span className="dot">•</span>

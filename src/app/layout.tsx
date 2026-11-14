@@ -75,6 +75,11 @@ export default function RootLayout({
           <SmoothScroll />
           {children}
         </LanguageProvider>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){function r(){document.querySelectorAll('iframe[src*="netlify"],a[href*="netlify.com"],[data-netlify-badge],[data-netlify-drawer],netlify-drawer,.netlify-badge,#netlify-badge').forEach(function(e){e.remove()});document.querySelectorAll('body > div').forEach(function(d){if(d.querySelector&&d.querySelector('a[href*="netlify"]'))d.remove();})}r();if(typeof MutationObserver!=='undefined'){new MutationObserver(r).observe(document.body,{childList:true,subtree:true})}else{setInterval(r,2000)}})();`,
+          }}
+        />
       </body>
     </html>
   )
