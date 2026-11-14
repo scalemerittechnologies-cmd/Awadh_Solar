@@ -12,7 +12,7 @@
 - **Styling**: Tailwind CSS v4 + Custom Modern Theme CSS (`globals.css`, `experience.css`, `admin.css`)
 - **3D & Motion**: Three.js, `@react-three/fiber`, `@react-three/drei`, GSAP, Lenis, Framer Motion
 - **Backend & Database**: Supabase (Postgres with RLS, Auth, Storage)
-- **Deployment**: Vercel / Node.js standalone with ISR caching
+- **Deployment**: Netlify Free with GitHub deployment and Cloudflare D1 storage
 
 ## 3. Database Schema Roadmap (Supabase Postgres)
 - `site_content`: Cached JSONB row for bilingual copy, countdown timer, hero photos, solution cards, products, calculator constants.

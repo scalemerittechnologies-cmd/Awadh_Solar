@@ -1,21 +1,16 @@
 import { readFile, readdir } from 'node:fs/promises'
 import path from 'node:path'
-import { HeadObjectCommand, PutObjectCommand, S3Client } from '@aws-sdk/client-s3'
 
 const required = [
   'CLOUDFLARE_ACCOUNT_ID',
   'CLOUDFLARE_D1_DATABASE_ID',
   'CLOUDFLARE_D1_API_TOKEN',
-  'CLOUDFLARE_R2_BUCKET',
-  'CLOUDFLARE_R2_ACCESS_KEY_ID',
-  'CLOUDFLARE_R2_SECRET_ACCESS_KEY',
 ]
 const missing = required.filter(name => !process.env[name])
 if (missing.length) throw new Error(`Missing environment variables: ${missing.join(', ')}`)
 
 const account = process.env.CLOUDFLARE_ACCOUNT_ID
 const database = process.env.CLOUDFLARE_D1_DATABASE_ID
-const bucket = process.env.CLOUDFLARE_R2_BUCKET
 const endpoint = `https://api.cloudflare.com/client/v4/accounts/${account}/d1/database/${database}/query`
 
 async function query(sql, params = []) {
@@ -82,35 +77,18 @@ if (Array.isArray(leads)) {
   console.log(`Local enquiries copied: ${leads.length} checked.`)
 }
 
-const r2 = new S3Client({
-  region: 'auto',
-  endpoint: `https://${account}.r2.cloudflarestorage.com`,
-  credentials: {
-    accessKeyId: process.env.CLOUDFLARE_R2_ACCESS_KEY_ID,
-    secretAccessKey: process.env.CLOUDFLARE_R2_SECRET_ACCESS_KEY,
-  },
-  forcePathStyle: true,
-})
 const uploadsDir = path.join(process.cwd(), 'data', 'uploads')
 let filenames = []
 try { filenames = (await readdir(uploadsDir)).filter(filename => /^[a-f0-9-]{20,50}\.webp$/.test(filename)) }
 catch (error) { if (error?.code !== 'ENOENT') throw error }
 let uploaded = 0
 for (const filename of filenames) {
-  let exists = false
-  try {
-    await r2.send(new HeadObjectCommand({ Bucket: bucket, Key: filename }))
-    exists = true
-  } catch (error) {
-    if (!['NoSuchKey', 'NotFound'].includes(error?.name)) throw error
-  }
-  if (exists) continue
+  const existing = await query('SELECT filename FROM media WHERE filename = ? LIMIT 1', [filename])
+  if (existing.length) continue
   const image = await readFile(path.join(uploadsDir, filename))
-  await r2.send(new PutObjectCommand({
-    Bucket: bucket, Key: filename, Body: image,
-    ContentType: 'image/webp', CacheControl: 'public, max-age=604800, immutable',
-  }))
+  if (image.byteLength > 1_250_000) throw new Error(`${filename} is too large for D1 media storage; resize it below 1.25 MB.`)
+  await query('INSERT INTO media (filename, content_base64, created_at) VALUES (?, ?, ?)', [filename, image.toString('base64'), new Date().toISOString()])
   uploaded++
 }
-console.log(`R2 photos: ${uploaded} uploaded, ${filenames.length - uploaded} already present.`)
-console.log('Cloudflare setup complete. Deploy with the same environment variables in Vercel.')
+console.log(`D1 photos: ${uploaded} uploaded, ${filenames.length - uploaded} already present.`)
+console.log('Cloudflare setup complete. Deploy with the same environment variables in Netlify.')

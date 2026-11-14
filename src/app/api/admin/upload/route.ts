@@ -3,6 +3,7 @@ import sharp from 'sharp'
 import { NextResponse } from 'next/server'
 import { isAdminAuthenticated } from '@/lib/admin-auth'
 import { saveUploadedImage } from '@/lib/site-content'
+import { maxD1ImageBytes } from '@/lib/cloudflare-media'
 
 export const runtime = 'nodejs'
 const maxBytes = 4 * 1024 * 1024
@@ -25,15 +26,16 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Upload a valid JPEG, PNG, WebP or AVIF image.' }, { status: 415 })
     }
     output = Buffer.alloc(0)
-    for (const [side, quality] of [[1800, 84], [1600, 78], [1400, 72], [1200, 65]]) {
+    const targetBytes = maxD1ImageBytes
+    for (const [side, quality] of [[1800, 82], [1600, 76], [1400, 70], [1200, 64], [1000, 58], [900, 50]]) {
       output = await sharp(source, { limitInputPixels: 40_000_000, failOn: 'error' })
         .rotate()
         .resize({ width: side, height: side, fit: 'inside', withoutEnlargement: true })
         .webp({ quality })
         .toBuffer()
-      if (output.byteLength <= maxBytes) break
+      if (output.byteLength <= targetBytes) break
     }
-    if (output.byteLength > maxBytes) return NextResponse.json({ error: 'This image is too large after optimization.' }, { status: 413 })
+    if (output.byteLength > targetBytes) return NextResponse.json({ error: 'This image is too detailed to fit free storage after optimization.' }, { status: 413 })
   } catch {
     return NextResponse.json({ error: 'This image could not be processed.' }, { status: 400 })
   }

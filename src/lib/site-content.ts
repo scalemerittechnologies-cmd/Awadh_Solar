@@ -118,9 +118,9 @@ export async function saveSiteContent(content: SiteContent) {
 }
 
 export async function saveUploadedImage(filename: string, content: Buffer) {
-  const { putR2Image, usesCloudflareR2 } = await import('@/lib/cloudflare-r2')
-  if (usesCloudflareR2()) {
-    await putR2Image(filename, content)
+  if (usesCloudflareD1()) {
+    const { putD1Image } = await import('@/lib/cloudflare-media')
+    await putD1Image(filename, content)
     return `/api/media/${filename}`
   }
   const directory = path.join(dataDir, 'uploads')

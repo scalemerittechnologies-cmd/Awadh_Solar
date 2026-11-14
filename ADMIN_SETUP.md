@@ -6,14 +6,10 @@ For this workspace, the local admin account is already configured in `.env.local
 
 The dashboard lets the administrator edit the public homepage copy, storefront and hero photos, solution cards, products, store contact details and the assumptions used by the solar-cost estimate. Image uploads accept JPEG, PNG, WebP and AVIF up to 8 MB; uploads are resized and stored as WebP. Click **Save & publish** after uploading or editing.
 
-## Persistent storage for Vercel or other serverless hosts
+## Persistent storage on Netlify
 
-For Vercel or other hosts with ephemeral filesystems, configure Supabase so edits and image uploads persist:
+Cloudflare D1 stores published content, uploaded photos and enquiries. Set `CLOUDFLARE_ACCOUNT_ID`, `CLOUDFLARE_D1_DATABASE_ID` and `CLOUDFLARE_D1_API_TOKEN` as server-only environment variables. Follow [the Cloudflare and Netlify setup](docs/CLOUDFLARE_NETLIFY_SETUP.md) to create the database and migrate local content before deploying. Never commit the token or prefix it with `NEXT_PUBLIC_`.
 
-1. Create a Supabase project and run `supabase/migrations/202610290001_site_content.sql` in its SQL Editor. It creates the private content table and public image bucket.
-2. Set `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY` and `SUPABASE_STORAGE_BUCKET=awadh-media` in `.env.local` and in the hosting provider's server-side environment settings. Keep the service-role key server-only; never add it to a `NEXT_PUBLIC_` variable.
-3. Restart/redeploy the app. Site content is cached and the dashboard invalidates that cache when you publish.
-
-If both Supabase variables are empty, local/self-hosted Node.js mode stores `data/site-content.json` and `data/uploads/` on disk. Keep that directory writable and backed up. A default Vercel filesystem is ephemeral, so use Supabase there.
+Without Cloudflare variables, local development stores content and uploads in `data/`. That directory is ignored by Git and is not persistent on a serverless host. Admin photos are resized to fit D1's free tier row limit.
 
 The login cookie is HTTP-only, same-site strict and expires after eight hours. Configure HTTPS in production. Login attempts are rate-limited per server process; use an upstream rate limit as well when running multiple instances.
