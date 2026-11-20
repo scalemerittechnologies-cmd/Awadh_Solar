@@ -1734,7 +1734,7 @@ button {
 
 .footer-main-grid {
   display: grid;
-  grid-template-columns: 1.4fr 1fr 1fr 1.2fr;
+  grid-template-columns: 1.5fr 1fr 1.2fr;
   gap: clamp(30px, 4vw, 70px);
   max-width: 1400px;
   margin: 0 auto;

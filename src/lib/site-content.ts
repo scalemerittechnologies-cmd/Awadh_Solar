@@ -43,14 +43,14 @@ export const defaultSiteContent: SiteContent = {
   projectsSubheading: 'Solar projects across Mirzapur and nearby districts, for homes, businesses and industries.',
   projects: [],
   solutions: [
-    { id: 'homes', title: 'Residential Rooftop Solar', description: 'Complete solar rooftop with Growatt/grid inverters and PM Surya Ghar subsidy assistance.', image: '/images/projects/residential-rooftop-growatt.jpg', href: '/solar-solutions/residential' },
+    { id: 'homes', title: 'Residential Rooftop Solar', description: 'Complete solar rooftop with grid inverters and PM Surya Ghar subsidy assistance.', image: '/images/projects/residential-rooftop-growatt.jpg', href: '/solar-solutions/residential' },
     { id: 'business', title: 'Commercial & Industrial Solar', description: 'High-capacity solar setups for carpet industries, factories, schools, and commercial premises.', image: '/images/projects/commercial-carpet-bhadohi.jpg', href: '/solar-solutions/commercial' },
     { id: 'institutions', title: 'Institutional Solar Systems', description: 'Solar solutions for colleges, hospitals, and government facilities with maximum uptime.', image: '/images/projects/commercial-carpet-bhadohi.jpg', href: '/solar-solutions/institutional' },
     { id: 'products', title: 'Solar Inverters & Batteries', description: 'Tier-1 Mono PERC panels, smart grid-tied inverters, and advanced battery backup systems.', image: '/images/projects/residential-rooftop-growatt.jpg', href: '/products' },
   ],
   products: [
     { id: 'panels', name: 'Monocrystalline Solar Panels', category: 'Panels', description: 'High-efficiency Tier-1 bifacial and mono PERC solar modules with 25-year performance warranty.', image: '/images/products/golden-solar-panel-array.webp', detail: 'High power density and superior low-light generation.', quote: '', href: '/products/solar-panels' },
-    { id: 'inverters', name: 'Growatt & Smart Solar Inverters', category: 'Inverters', description: 'Smart grid-tied, hybrid, and off-grid solar inverters with live mobile app generation monitoring.', image: '/images/projects/residential-rooftop-growatt.jpg', detail: 'Advanced MPPT tracking and robust surge protection.', quote: '', href: '/products/inverters' },
+    { id: 'inverters', name: 'Smart Solar Inverters', category: 'Inverters', description: 'Smart grid-tied, hybrid, and off-grid solar inverters with live mobile app generation monitoring.', image: '/images/projects/residential-rooftop-growatt.jpg', detail: 'Advanced MPPT tracking and robust surge protection.', quote: '', href: '/products/inverters' },
     { id: 'batteries', name: 'Lithium & Solar Batteries', category: 'Storage', description: 'Heavy-duty tubular and LiFePO4 solar batteries for 24×7 backup during power outages.', image: '/images/products/solar-battery.svg', detail: 'Long cycle life and fast solar charging compatibility.', quote: '', href: '/products/batteries' },
   ],
   calculator: { rupeesPerUnit: 8, monthlyUnitsPerKw: 120, panelWatts: 540, costPerKwMin: 50000, costPerKwMax: 78000 },

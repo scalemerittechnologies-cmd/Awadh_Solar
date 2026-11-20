@@ -22,7 +22,6 @@ const requirements = [
   { en: 'Residential Rooftop Solar (1kW - 10kW)', hi: 'घरेलू रूफटॉप सोलर सिस्टम (1kW - 10kW)' },
   { en: 'Commercial & Industrial Solar (10kW+)', hi: 'व्यावसायिक एवं औद्योगिक सोलर (10kW+)' },
   { en: 'Solar Inverter & Battery Storage', hi: 'सोलर इन्वर्टर एवं लिथियम/ट्यूबलर बैटरी' },
-  { en: 'Solar Water Pump / Agricultural', hi: 'सोलर वाटर पंप एवं कृषि समाधान' },
   { en: 'System Maintenance & Repair', hi: 'सोलर सर्विसिंग, रिपेयर एवं मेंटेनेंस' },
 ]
 

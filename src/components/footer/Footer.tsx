@@ -112,43 +112,6 @@ export function Footer({ brand = 'Over The Top Solar', phone = '89530 69011', ad
                 <T hi="सोलर बचत कैलकुलेटर">Solar Bill Calculator</T>
               </Link>
             </li>
-            <li>
-              <Link href="/#solutions">
-                <T hi="सोलर वाटर पंप (कृषि)">Solar Water Pumps</T>
-              </Link>
-            </li>
-          </ul>
-        </div>
-
-        {/* Col 3: Hardware & Products */}
-        <div className="footer-col">
-          <h3><T hi="उपकरण एवं उत्पाद">Hardware & Tech</T></h3>
-          <ul className="footer-link-list">
-            <li>
-              <Link href="/#product-panels">
-                <T hi="मोनोक्रिस्टलाइन सोलर पैनल्स">Mono PERC Solar Panels</T>
-              </Link>
-            </li>
-            <li>
-              <Link href="/#product-inverters">
-                <T hi="ग्रिवाट एवं स्मार्ट इन्वर्टर्स">Growatt Smart Inverters</T>
-              </Link>
-            </li>
-            <li>
-              <Link href="/#product-batteries">
-                <T hi="सोलर लिथियम एवं ट्यूबलर बैटरी">Solar Batteries & Storage</T>
-              </Link>
-            </li>
-            <li>
-              <Link href="/#projects-showcase">
-                <T hi="पूर्ण प्रोजेक्ट गैलरी">Installation Gallery</T>
-              </Link>
-            </li>
-            <li>
-              <Link href="/#about">
-                <T hi="हमारे बारे में">About Our Company</T>
-              </Link>
-            </li>
           </ul>
         </div>
 
