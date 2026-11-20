@@ -9,7 +9,7 @@ const contactInfo = [
     icon: MapPin,
     title: 'Visit Us',
     details: ['Over The Top Solar', 'Near District Hospital', 'Mirzapur, Uttar Pradesh 231001'],
-    link: { href: 'https://maps.google.com', label: 'Open in Maps' },
+    link: { href: 'https://maps.app.goo.gl/zQvBNyLQm9bf9dmV9', label: 'Open in Maps' },
   },
   {
     icon: Phone,

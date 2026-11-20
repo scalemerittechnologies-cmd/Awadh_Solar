@@ -15,6 +15,7 @@ import {
 } from 'lucide-react'
 import { LanguageSwitcher, T } from '@/components/language/LanguageProvider'
 import { GreetingClock } from '@/components/ui/GreetingClock'
+import { GOOGLE_BUSINESS_PROFILE_URL } from '@/lib/location'
 
 const navItems = [
   { href: '#about', label: 'About Us' },
@@ -49,9 +50,15 @@ export function Navigation({
         <div className="topbar-inner">
           <div className="topbar-left">
             <GreetingClock variant="topbar" />
-            <span className="topbar-location hidden lg:flex">
+            <a
+              href={GOOGLE_BUSINESS_PROFILE_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="topbar-location hidden lg:flex"
+              title="Open Awadh Enterprises in Google Maps"
+            >
               <MapPin size={13} /> {address}
-            </span>
+            </a>
           </div>
 
           <div className="topbar-right">

@@ -41,6 +41,7 @@ import { EnquiryTriggerButton } from '@/components/ui/EnquiryTriggerButton'
 import { isAdminAuthenticated } from '@/lib/admin-auth'
 import { AdminTabSessionGuard } from '@/components/admin/AdminTabSessionGuard'
 import { defaultEnquirySettings, getEnquirySettings } from '@/lib/enquiry-settings'
+import { GOOGLE_BUSINESS_PROFILE_URL } from '@/lib/location'
 
 export const dynamic = 'force-dynamic'
 type SolarService = {
@@ -408,13 +409,18 @@ export default async function HomePage() {
               <small><T>Options for your needs</T></small>
             </span>
           </div>
-          <div>
+          <a
+            href={GOOGLE_BUSINESS_PROFILE_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            title="Open Awadh Enterprises in Google Maps"
+          >
             <MapPin />
             <span>
               <b><T>Based in Mirzapur</T></b>
               <small>{content.address}</small>
             </span>
-          </div>
+          </a>
           <EnquiryTriggerButton className="service-strip-cta">
             <T hi="साइट विज़िट बुक करें">Book Site Visit</T> <ArrowRight size={15} />
           </EnquiryTriggerButton>

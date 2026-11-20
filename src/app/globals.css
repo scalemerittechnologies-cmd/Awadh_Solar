@@ -497,7 +497,8 @@ body > iframe:not([src*="youtube"]):not([src*="google"]):not([src*="maps"]) {
 }
 
 .public-product-image .site-photo {
-  object-fit: contain;
+  object-fit: cover;
+  object-position: center;
 }
 
 .public-product-image > span {

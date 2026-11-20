@@ -1,5 +1,5 @@
-export const GOOGLE_BUSINESS_PROFILE_URL = 'https://share.google/z8kJEbxPZtqX1ZeKd'
+export const GOOGLE_BUSINESS_PROFILE_URL = 'https://maps.app.goo.gl/zQvBNyLQm9bf9dmV9'
 
-export function googleMapsDirectionsUrl(address: string) {
-  return `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(address)}`
+export function googleMapsDirectionsUrl(_address?: string) {
+  return 'https://maps.app.goo.gl/zQvBNyLQm9bf9dmV9'
 }
