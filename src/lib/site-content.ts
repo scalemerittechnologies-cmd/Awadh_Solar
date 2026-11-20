@@ -51,7 +51,7 @@ export const defaultSiteContent: SiteContent = {
   products: [
     { id: 'panels', name: 'Monocrystalline Solar Panels', category: 'Panels', description: 'High-efficiency Tier-1 bifacial and mono PERC solar modules with 25-year performance warranty.', image: '/images/products/golden-solar-panel-array.webp', detail: 'High power density and superior low-light generation.', quote: '', href: '/products/solar-panels' },
     { id: 'inverters', name: 'Smart Solar Inverters', category: 'Inverters', description: 'Smart grid-tied, hybrid, and off-grid solar inverters with live mobile app generation monitoring.', image: '/images/projects/residential-rooftop-growatt.jpg', detail: 'Advanced MPPT tracking and robust surge protection.', quote: '', href: '/products/inverters' },
-    { id: 'batteries', name: 'Lithium & Solar Batteries', category: 'Storage', description: 'Heavy-duty tubular and LiFePO4 solar batteries for 24×7 backup during power outages.', image: '/images/products/solar-battery.svg', detail: 'Long cycle life and fast solar charging compatibility.', quote: '', href: '/products/batteries' },
+    { id: 'batteries', name: 'Lithium & Solar Batteries', category: 'Storage', description: 'Heavy-duty tubular and LiFePO4 solar batteries for 24×7 backup during power outages.', image: '/images/products/solar-battery-real.jpg', detail: 'Long cycle life and fast solar charging compatibility.', quote: '', href: '/products/batteries' },
   ],
   calculator: { rupeesPerUnit: 8, monthlyUnitsPerKw: 120, panelWatts: 540, costPerKwMin: 50000, costPerKwMax: 78000 },
 }
@@ -66,7 +66,7 @@ const starterPhotos: Record<string, string> = {
   '/photo-1486406146926-c627a92ad1ab': '/storefront-showcase.webp',
   '/photo-1562774053-701939374585': '/images/india/etawah-school.webp',
   '/photo-1592833159155-c62df1b65634': '/images/products/solar-inverter.svg',
-  '/photo-1621905251918-48416bd8575a': '/images/products/solar-battery.svg',
+  '/photo-1621905251918-48416bd8575a': '/images/products/solar-battery-real.jpg',
 }
 function currentPhoto(src: string) {
   try {
