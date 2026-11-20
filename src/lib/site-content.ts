@@ -68,7 +68,13 @@ const starterPhotos: Record<string, string> = {
   '/photo-1592833159155-c62df1b65634': '/images/products/solar-inverter.svg',
   '/photo-1621905251918-48416bd8575a': '/images/products/solar-battery-real.jpg',
 }
+// Also replace old local SVG paths that may still be stored in D1
+const legacyPaths: Record<string, string> = {
+  '/images/products/solar-battery.svg': '/images/products/solar-battery-real.jpg',
+}
 function currentPhoto(src: string) {
+  // First check if the path itself is a known legacy local path
+  if (legacyPaths[src]) return legacyPaths[src]
   try {
     const url = new URL(src)
     return url.hostname === 'images.unsplash.com' ? starterPhotos[url.pathname] ?? src : src
